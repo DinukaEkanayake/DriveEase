@@ -27,15 +27,13 @@ public class VehicleReserveServiceImplementation implements VehicleReserveServic
             // You can access other user attributes in a similar manner
 
             var vehicle = Vehicle.builder()
-                    .name(name)
-                    .email(email)
-                    .phone(contactNumber)
                     .date(request.getDate())
                     .time(request.getTime())
                     .location(request.getLocation())
                     .vehicle_no(request.getVehicle_no())
                     .mileage(request.getMileage())
                     .message(request.getMessage())
+                    .username("hi")
                     .build();
 
             var savedVehicle=vehicleRepository.save(vehicle);
