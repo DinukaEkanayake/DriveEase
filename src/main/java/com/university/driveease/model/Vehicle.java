@@ -21,12 +21,7 @@ public class Vehicle {
     @Column(name = "booking_id")
     private Long id;
 
-    @Column(nullable = false,length = 255)
-    private String name;
-    @Column(nullable = false,length = 255)
-    private String email;
-    @Column(nullable = false,length = 255)
-    private String phone;
+
     @Column(nullable = false)
     private Date date;
     @Column(nullable = false)
@@ -39,6 +34,8 @@ public class Vehicle {
     private int mileage;
     @Column(nullable = false)
     private String message;
+    @Column(nullable = false)
+    private String username;
 
 
 }
