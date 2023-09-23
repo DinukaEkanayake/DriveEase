@@ -7,9 +7,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/isec_assessment2?createDatabaseIfNotExist=true
-    username: root
-    password: Dinuka1999
+    url: jdbc:mysql://51.132.137.223:3306/isec_assessment2?createDatabaseIfNotExist=true
+    username: isec
+    password: EUHHaYAmtzbv
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -27,8 +27,21 @@ spring:
     username: dinukaekanayaka18@gmail.com
     password: krrbrykibkfniplq
 
+  #OAuth Application Properties
+  security:
+    oauth2:
+      client:
+        registration:
+          asgardeo:
+            client-name: Asgardeo
+            client-id: icG0fGqggtOebJnKLTBvwmkhmD8a
+            client-secret: L9bbdyw2NpynwplENrA6Nx4LYu4tJdp1J8IVzu2YuIAa
+            redirect-uri: https://localhost:8080/login/oauth2/code/asgardeo
+            authorization-grant-type: Code
+            scope:
+              - openid profile
+        #Asgardeo Properties
+        provider:
+          asgardeo:
+            issuer-uri: https://api.asgardeo.io/t/org1i56a/oauth2/token
 
-okta:
-  oauth2:
-    issuer: https://dev-92204500.okta.com/oauth2/default
-    client-id: 0oabdzme39bndSHm45d7
