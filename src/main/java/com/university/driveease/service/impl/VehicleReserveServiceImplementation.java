@@ -43,5 +43,9 @@ public class VehicleReserveServiceImplementation implements VehicleReserveServic
         vehicleRepository.deleteById(reservationId);
     }
 
+    @Override
+    public List<Vehicle> getAllReservationsByUsername(String username) {
+        return vehicleRepository.findAllByUsername(username);
+    }
 
 }
