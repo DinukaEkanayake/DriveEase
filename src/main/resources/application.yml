@@ -36,12 +36,15 @@ spring:
             client-name: Asgardeo
             client-id: icG0fGqggtOebJnKLTBvwmkhmD8a
             client-secret: L9bbdyw2NpynwplENrA6Nx4LYu4tJdp1J8IVzu2YuIAa
-            redirect-uri: https://localhost:8080/login/oauth2/code/asgardeo
-            authorization-grant-type: Code
+            redirect-uri: http://localhost:8080/login/oauth2/code/asgardeo
+            authorization-grant-type: authorization_code
             scope:
-              - openid profile
+              - openid
         #Asgardeo Properties
         provider:
           asgardeo:
             issuer-uri: https://api.asgardeo.io/t/org1i56a/oauth2/token
+
+  thymeleaf:
+    cache: false
 
