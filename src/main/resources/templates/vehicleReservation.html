@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VehicleReservation</title>
+</head>
+<body>
+
+    <form th:action="@{/reservation}" method="post">
+        Date: <input type="date" name="date" required><br>
+        Time: <select name="time">
+        <option value="10AM">10 AM</option>
+        <option value="11AM">11 AM</option>
+        <option value="12PM">12 PM</option>
+    </select><br>
+        Location: <select name="location">
+        <option value="District1">District 1</option>
+        <option value="District2">District 2</option>
+        <option value="District3">District 3</option>
+    </select><br>
+        Vehicle Registration: <input type="text" name="vehicleRegistration" required><br>
+        Mileage: <input type="number" name="mileage" required><br>
+        Message: <textarea name="message"></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+</body>
+</html>
