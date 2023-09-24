@@ -4,28 +4,31 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/profile", "/reservation").authenticated()
+                .authorizeHttpRequests()
+                //whitelisting-give authorization to some endpoints
+                .requestMatchers("/profile", "/reservation").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .oauth2Login()
-//                .defaultSuccessURL("/profile") // Redirect after successful login
+                //.defaultSuccessURL("/profile") // Redirect after successful login
                 .and()
                 .logout().logoutSuccessUrl("/");
+
+        return http.build();
     }
 
     @Bean
