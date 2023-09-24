@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All Reservations</title>
+</head>
+<body>
+
+<!-- reservations.html -->
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Vehicle Registration</th>
+        <th>Mileage</th>
+        <th>Message</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.date}"></td>
+        <td th:text="${reservation.time}"></td>
+        <td th:text="${reservation.location}"></td>
+        <td th:text="${reservation.vehicleRegistration}"></td>
+        <td th:text="${reservation.mileage}"></td>
+        <td th:text="${reservation.message}"></td>
+        <td>
+            <form th:action="@{/delete-reservation/{id}(id=${reservation.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
