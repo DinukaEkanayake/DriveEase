@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDTO {
-    private String token;
-    private String code;
-    private String message;
-    private Object content;
+
+    private String name;
+    private String email;
+    private String contactNumber;
+    private String country;
+
 }
