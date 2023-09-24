@@ -38,4 +38,10 @@ public class VehicleReserveServiceImplementation implements VehicleReserveServic
         return "redirect:/profile";
     }
 
+    @Override
+    public void deleteReservation(Long reservationId) {
+        vehicleRepository.deleteById(reservationId);
+    }
+
+
 }

@@ -14,4 +14,6 @@ public interface VehicleReserveService {
     //ResponseDTO saveVehicle(RequestDTO request, Principal principal);
 
     String saveReservation(Vehicle reservation,String username);
+
+    void deleteReservation(Long reservationId);
 }

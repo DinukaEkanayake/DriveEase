@@ -32,7 +32,13 @@ public class VehicleReserveController {
         return profile; // Redirect to the profile page
     }
 
+    @PostMapping("/delete-reservation/{reservationId}")
+    public String deleteReservation(@PathVariable Long reservationId) {
+        // Implement reservation deletion based on the reservationId
+        vehicleReserveService.deleteReservation(reservationId);
 
+        return "redirect:/profile"; // Redirect to the profile page
+    }
 
 
 
