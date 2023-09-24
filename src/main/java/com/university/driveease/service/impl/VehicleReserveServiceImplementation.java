@@ -7,49 +7,35 @@ import com.university.driveease.repository.VehicleRepository;
 import com.university.driveease.service.VehicleReserveService;
 import com.university.driveease.util.StringList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class VehicleReserveServiceImplementation implements VehicleReserveService {
 
     private final VehicleRepository vehicleRepository;
+
     @Override
-    public ResponseDTO saveVehicle(RequestDTO request, Principal principal) {
+    public String saveReservation(Vehicle reservation,String username) {
 
-        if (principal instanceof OAuth2AuthenticationToken oauthToken) {
-            String name = oauthToken.getName(); // User's name
-            String email = oauthToken.getPrincipal().getAttribute("email"); // User's email (adjust the attribute name as needed)
-            String contactNumber = oauthToken.getPrincipal().getAttribute("contactNumber"); // User's contact number (adjust the attribute name as needed)
-            // You can access other user attributes in a similar manner
-
-            var vehicle = Vehicle.builder()
-                    .date(request.getDate())
-                    .time(request.getTime())
-                    .location(request.getLocation())
-                    .vehicle_no(request.getVehicle_no())
-                    .mileage(request.getMileage())
-                    .message(request.getMessage())
-                    .username("hi")
-                    .build();
-
-            var savedVehicle=vehicleRepository.save(vehicle);
-
-            return ResponseDTO.builder()
-                    .code(StringList.RSP_SUCCESS)
-                    .content(savedVehicle)
-                    .message("Vehicle reserved")
-                    .build();
-        }
-
-        // Handle non-OAuth2 authentication (e.g., custom authentication)
-        return ResponseDTO.builder()
-                .code(StringList.RSP_ERROR)
-                .message("User profile not available")
+        var vehicle_reservation = Vehicle.builder()
+                .date(reservation.getDate())
+                .time(reservation.getTime())
+                .location(reservation.getLocation())
+                .vehicle_no(reservation.getVehicle_no())
+                .mileage(reservation.getMileage())
+                .message(reservation.getMessage())
+                .username(username)
                 .build();
 
+        vehicleRepository.save(vehicle_reservation);
+
+        return "redirect:/profile";
     }
+
 }
