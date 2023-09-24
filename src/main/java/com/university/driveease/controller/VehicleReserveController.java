@@ -40,6 +40,15 @@ public class VehicleReserveController {
         return "redirect:/profile"; // Redirect to the profile page
     }
 
+    @GetMapping("/getreservations")
+    public String viewAllReservations(Model model, OAuth2AuthenticationToken token) {
+        String username = token.getName();
+        List<Vehicle> reservations = vehicleReserveService.getAllReservationsByUsername(username);
+        model.addAttribute("reservations", reservations);
+        return "reservations"; // Display the reservations in a view
+    }
+
+
 
 
 }
