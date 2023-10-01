@@ -29,7 +29,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .requestMatchers("/").authenticated()
+                .requestMatchers("/login").authenticated()
                 .anyRequest().permitAll();
         http.oauth2Login()
                 .loginProcessingUrl(loginProcessPath)
