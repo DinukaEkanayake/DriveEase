@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "api/")
+//@RequestMapping(value = "api/")
 @AllArgsConstructor
 public class UserProfileController {
 
@@ -18,9 +18,11 @@ public class UserProfileController {
 
         ResponseDTO user=userProfileService.getUser(token);
 
-        // Display user information in the view
-        return "Name: " + user.getName() + "<br>Email: " + user.getEmail() +
-                "<br>Contact Number: " + user.getContactNumber() + "<br>Country: " + user.getCountry();
+        //Display user information in the view
+//        return "Name: " + user.getName() + "<br>Email: " + user.getEmail() +
+//                "<br>Contact Number: " + user.getContactNumber() + "<br>Country: " + user.getCountry();
+
+        return "home";
     }
 
 

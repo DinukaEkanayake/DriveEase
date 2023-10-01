@@ -1,18 +1,12 @@
 package com.university.driveease.controller;
 
-import com.university.driveease.dto.RequestDTO;
-import com.university.driveease.dto.ResponseDTO;
 import com.university.driveease.model.Vehicle;
 import com.university.driveease.service.VehicleReserveService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
