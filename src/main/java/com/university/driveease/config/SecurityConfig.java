@@ -1,4 +1,4 @@
-package com.university.driveease.config;//package com.university.driveease.config;
+package com.university.driveease.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,20 +28,12 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http
-                .authorizeHttpRequests()
-                //whitelisting-give authorization to some endpoints
-                .requestMatchers("/secured").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .oauth2Login()
+        http.authorizeHttpRequests()
+                .requestMatchers("/").authenticated()
+                .anyRequest().permitAll();
+        http.oauth2Login()
                 .loginProcessingUrl(loginProcessPath)
-                .loginPage("/oauth2/authorization/asgardeo")
-                .defaultSuccessUrl("/login/oauth2/code/asgardeo") // Redirect after successful login
-                .and()
-                .logout().logoutSuccessUrl("/");
-
+                .loginPage("/oauth2/authorization/asgardeo");
         return http.build();
     }
 
