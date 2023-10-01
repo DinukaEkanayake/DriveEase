@@ -18,13 +18,15 @@
     </style>
 </head>
 <body>
-<div th:if="${user != null}">
+<div th:if="${oauth2User != null}">
     <h1>Logged in as:
-        <span th:text="${user.username}" style="color: red"/>
+        <p>Name: <span th:text="${name}"></span></p>
+        <p>Email: <span th:text="${email}"></span></p>
     </h1>
     <h1><a href="/logout">Logout with Spring's default logout-form</a></h1>
 </div>
-<div th:if="${user == null}">
+
+<div th:if="${oauth2User == null}">
 <!--    <h1>Anonymous user please authenticate.</h1>-->
 <!--    <h1><a href="/login/oauth2/code/asgardeo">Login with Spring's default login-from</a></h1>-->
     <div class="container">
