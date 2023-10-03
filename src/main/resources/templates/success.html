@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Successful</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        /* Center-align the h1 element */
+        h1 {
+            text-align: center;
+        }
+
+        /* Center-align the ul element */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li{
+            margin-top: 10px;
+            font-size: large;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #6c757d6b;
+            border-color: #6c757d7a;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Reservation Successful</h1>
+<p>Your vehicle reservation has been confirmed!</p>
+
+<h2>Reservation Details</h2>
+<ul>
+    <li><strong>Date:</strong><span th:text="${reserved_date}"></span></li>
+    <li><strong>Time:</strong><span th:text="${reserved_time}"></span></li>
+    <li><strong>Location:</strong><span th:text="${reserved_location}"></span></li>
+    <li><strong>Vehicle Registration:</strong><span th:text="${reserved_vehicle_no}"></span></li>
+    <li><strong>Mileage:</strong><span th:text="${reserved_mileage}"></span></li>
+    <li><strong>Message:</strong><span th:text="${reserved_message}"></span></li>
+    <li><strong>Username:</strong><span th:text="${reserved_username}"></span></li>
+</ul>
+
+<a class="btn btn-primary" href="/">Return to Home Page</a>
+
+</div>
+</body>
+</html>
