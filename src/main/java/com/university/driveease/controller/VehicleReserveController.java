@@ -2,23 +2,18 @@ package com.university.driveease.controller;
 
 import com.university.driveease.model.Vehicle;
 import com.university.driveease.repository.VehicleRepository;
-import com.university.driveease.service.VehicleReserveService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class VehicleReserveController {
 
-    private final VehicleReserveService vehicleReserveService;
     private final VehicleRepository vehicleRepository;
 
     @GetMapping("/reservation")
@@ -28,7 +23,6 @@ public class VehicleReserveController {
 
         model.addAttribute("vehicle", vehicle);
         model.addAttribute("date",vehicle.getDate());
-        //vehicle.setTime(LocalTime.now()); // Set the time with a LocalTime object
         model.addAttribute("time",vehicle.getTime());
         model.addAttribute("location",vehicle.getLocation());
         model.addAttribute("vehicle_no",vehicle.getVehicle_no());
@@ -40,7 +34,7 @@ public class VehicleReserveController {
 
     }
     @PostMapping("/reservation")
-    public String saveReservation(@ModelAttribute("vehicle") Vehicle form, OAuth2AuthenticationToken token) {
+    public String saveReservation(@ModelAttribute("vehicle") Vehicle form, OAuth2AuthenticationToken token,Model model) {
 
             if(vehicleRepository.findByVehicle_no(form.getVehicle_no()).isPresent()){
                 return "error";
@@ -48,9 +42,29 @@ public class VehicleReserveController {
             else {
                 // Retrieve the authenticated user's username from the token
                 String username = token.getName();
-                // Save the reservation to the database along with the username
+                var vehicle_reservation = Vehicle.builder()
+                        .date(form.getDate())
+                        .time(form.getTime())
+                        .location(form.getLocation())
+                        .vehicle_no(form.getVehicle_no())
+                        .mileage(form.getMileage())
+                        .message(form.getMessage())
+                        .username(username)
+                        .build();
 
-                return vehicleReserveService.saveReservation(form, username);
+                // Add user details to the model
+                model.addAttribute("reserved_date",vehicle_reservation.getDate());
+                model.addAttribute("reserved_time",vehicle_reservation.getTime());
+                model.addAttribute("reserved_location",vehicle_reservation.getLocation());
+                model.addAttribute("reserved_vehicle_no",vehicle_reservation.getVehicle_no());
+                model.addAttribute("reserved_mileage",vehicle_reservation.getMileage());
+                model.addAttribute("reserved_message",vehicle_reservation.getMessage());
+                model.addAttribute("reserved_username",vehicle_reservation.getUsername());
+
+                // Save the reservation to the database along with the username
+                vehicleRepository.save(vehicle_reservation);
+
+                return "success";
             }
 
     }
@@ -58,7 +72,7 @@ public class VehicleReserveController {
     @PostMapping("/delete-reservation/{reservationId}")
     public String deleteReservation(@PathVariable Long reservationId) {
         // Implement reservation deletion based on the reservationId
-        vehicleReserveService.deleteReservation(reservationId);
+        vehicleRepository.deleteById(reservationId);
 
         return "redirect:/profile"; // Redirect to the profile page
     }
@@ -66,12 +80,10 @@ public class VehicleReserveController {
     @GetMapping("/getreservations")
     public String viewAllReservations(Model model, OAuth2AuthenticationToken token) {
         String username = token.getName();
-        List<Vehicle> reservations = vehicleReserveService.getAllReservationsByUsername(username);
+        List<Vehicle> reservations = vehicleRepository.findAllByUsername(username);
         model.addAttribute("reservations", reservations);
         return "reservations"; // Display the reservations in a view
     }
-
-
 
 
 }
