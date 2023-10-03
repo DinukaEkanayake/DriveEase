@@ -6,27 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VehicleReservation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #6c757d6b;
+            border-color: #6c757d7a;
+            margin-top: 20px;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .item{
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <form th:action="@{/reservation}" method="post">
-        Date: <input type="date" name="date" required><br>
-        Time: <select name="time">
-        <option value="10AM">10 AM</option>
-        <option value="11AM">11 AM</option>
-        <option value="12PM">12 PM</option>
+<div class="container">
+
+    <form th:action= "@{/reservation}" method="post" th:object="${vehicle}">
+        Date: <input type="date" name="date" th:field="*{date}" required><br>
+        Time: <select class="item" name="time" required>
+        <option value="10AM">10AM</option>
+        <option value="11AM">11AM</option>
+        <option value="12PM">12PM</option>
     </select><br>
-        Location: <select name="location">
-        <option value="District1">District 1</option>
-        <option value="District2">District 2</option>
-        <option value="District3">District 3</option>
+        Location: <select class="item" name="location" th:field="*{location}">
+        <option value="District1">District1</option>
+        <option value="District2">District2</option>
+        <option value="District3">District3</option>
     </select><br>
-        Vehicle Registration: <input type="text" name="vehicleRegistration" required><br>
-        Mileage: <input type="number" name="mileage" required><br>
-        Message: <textarea name="message"></textarea><br>
-        <input type="submit" value="Submit">
+        Vehicle Registration: <input class="item" type="text" name="vehicleRegistration"  th:field="*{vehicle_no}" required><br>
+        Mileage: <input class="item" type="number" name="mileage" th:field="*{mileage}" required><br>
+        Message: <textarea class="item" name="message" th:field="*{message}"></textarea><br>
+        <input type="submit" value="Rent" class="btn btn-primary">
     </form>
-
-
+</div>
 </body>
 </html>

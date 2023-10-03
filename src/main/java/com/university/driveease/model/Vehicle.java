@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -13,7 +15,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "vehicle_service")
 public class Vehicle {
 
     @Id
@@ -21,10 +22,11 @@ public class Vehicle {
     @Column(name = "booking_id")
     private Long id;
 
-
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "hha")
     private LocalTime time;
     @Column(nullable = false,length = 255)
     private String location;
@@ -36,6 +38,7 @@ public class Vehicle {
     private String message;
     @Column(nullable = false)
     private String username;
+
 
 
 }
