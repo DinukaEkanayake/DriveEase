@@ -50,7 +50,7 @@
             <td th:text="${reservation.mileage}"></td>
             <td th:text="${reservation.message}"></td>
             <td>
-                <form th:action="@{/delete-reservation/{reservationId}(id=${reservation.id})}" method="post">
+                <form th:action="@{'/delete-reservation/' + ${reservation.id}}" method="post">
                     <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
             </td>

@@ -61,7 +61,6 @@ public class VehicleReserveController {
                 model.addAttribute("reserved_message",vehicle_reservation.getMessage());
                 model.addAttribute("reserved_username",vehicle_reservation.getUsername());
 
-                // Save the reservation to the database along with the username
                 vehicleRepository.save(vehicle_reservation);
 
                 return "success";
@@ -69,10 +68,12 @@ public class VehicleReserveController {
 
     }
 
-    @PostMapping("/delete-reservation/{reservationId}")
-    public String deleteReservation(@PathVariable Long reservationId) {
-        // Implement reservation deletion based on the reservationId
-        vehicleRepository.deleteById(reservationId);
+    @PostMapping("/delete-reservation/{booking_id}")
+    public String deleteReservation(@PathVariable("booking_id") Long id,Model model) {
+
+        vehicleRepository.deleteById(id);
+        List<Vehicle> reservations = vehicleRepository.findAll();
+        model.addAttribute("reservations", reservations);
 
         return "reservations";
     }
