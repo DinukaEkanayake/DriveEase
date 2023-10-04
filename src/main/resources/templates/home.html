@@ -20,8 +20,11 @@
 <body>
 <div th:if="${oauth2User != null}">
     <h1>Logged in as:
-        <p>Name: <span th:text="${name}"></span></p>
+        <p>UserName: <span th:text="${username}"></span></p>
         <p>Email: <span th:text="${email}"></span></p>
+        <p>Name: <span th:text="${name}"></span></p>
+        <p>Mobile: <span th:text="${contactNo}"></span></p>
+        <p>Country: <span th:text="${country}"></span></p>
     </h1>
     <h1><a href="/logout">Logout with Spring's default logout-form</a></h1>
     <h1><a href="/reservation">Rent a Car</a></h1>
