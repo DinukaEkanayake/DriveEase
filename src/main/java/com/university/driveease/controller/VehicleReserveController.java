@@ -69,18 +69,18 @@ public class VehicleReserveController {
     }
 
     @PostMapping("/delete-reservation/{booking_id}")
-    public String deleteReservation(@PathVariable("booking_id") Long id,Model model) {
+    public String deleteReservation(@PathVariable("booking_id") Long id,Model model,OAuth2AuthenticationToken token) {
 
         vehicleRepository.deleteById(id);
-        List<Vehicle> reservations = vehicleRepository.findAll();
+        List<Vehicle> reservations = vehicleRepository.findAllByUsername(token.getName());
         model.addAttribute("reservations", reservations);
 
         return "reservations";
     }
 
     @GetMapping("/getreservations")
-    public String viewAllReservations(Model model) {
-        List<Vehicle> reservations = vehicleRepository.findAll();
+    public String viewAllReservations(Model model,OAuth2AuthenticationToken token) {
+        List<Vehicle> reservations = vehicleRepository.findAllByUsername(token.getName());
         model.addAttribute("reservations", reservations);
         return "reservations";
     }
