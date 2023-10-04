@@ -74,15 +74,14 @@ public class VehicleReserveController {
         // Implement reservation deletion based on the reservationId
         vehicleRepository.deleteById(reservationId);
 
-        return "redirect:/profile"; // Redirect to the profile page
+        return "reservations";
     }
 
     @GetMapping("/getreservations")
-    public String viewAllReservations(Model model, OAuth2AuthenticationToken token) {
-        String username = token.getName();
-        List<Vehicle> reservations = vehicleRepository.findAllByUsername(username);
+    public String viewAllReservations(Model model) {
+        List<Vehicle> reservations = vehicleRepository.findAll();
         model.addAttribute("reservations", reservations);
-        return "reservations"; // Display the reservations in a view
+        return "reservations";
     }
 
 

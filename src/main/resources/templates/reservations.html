@@ -1,39 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <title>All Reservations</title>
+    <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #6c757d6b;
+            border-color: #6c757d7a;
+            margin-top: 20px;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        th{
+            padding-right: 40px;
+        }
+        td{
+            padding-right: 40px;
+        }
+    </style>
 </head>
 <body>
-
-<!-- reservations.html -->
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Location</th>
-        <th>Vehicle Registration</th>
-        <th>Mileage</th>
-        <th>Message</th>
-        <th>Username</th>
-    </tr>
-    <tr th:each="reservation : ${reservations}">
-        <td th:text="${reservation.date}"></td>
-        <td th:text="${reservation.time}"></td>
-        <td th:text="${reservation.location}"></td>
-        <td th:text="${reservation.vehicleRegistration}"></td>
-        <td th:text="${reservation.mileage}"></td>
-        <td th:text="${reservation.message}"></td>
-        <td>
-            <form th:action="@{/delete-reservation/{id}(id=${reservation.id})}" method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-</table>
+<div class="container">
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Vehicle_No</th>
+            <th>Mileage</th>
+            <th>Message</th>
+        </tr>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.username}"></td>
+            <td th:text="${reservation.date}"></td>
+            <td th:text="${reservation.time}"></td>
+            <td th:text="${reservation.location}"></td>
+            <td th:text="${reservation.vehicle_no}"></td>
+            <td th:text="${reservation.mileage}"></td>
+            <td th:text="${reservation.message}"></td>
+            <td>
+                <form th:action="@{/delete-reservation/{reservationId}(id=${reservation.id})}" method="post">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>
