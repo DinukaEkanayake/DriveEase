@@ -15,7 +15,7 @@ public class UserController {
 	public String displayHomePage(@AuthenticationPrincipal OAuth2User oauth2User, Model model) {
 
 		model.addAttribute("oauth2User",oauth2User);
-		return "home";
+		return "index";
 	}
 
 }

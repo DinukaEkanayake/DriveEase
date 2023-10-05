@@ -9,7 +9,7 @@ public class LogoutController {
     @GetMapping("/logout")
     public String logout() {
         SecurityContextHolder.clearContext();
-        return "home";
+        return "index";
     }
 }
 
