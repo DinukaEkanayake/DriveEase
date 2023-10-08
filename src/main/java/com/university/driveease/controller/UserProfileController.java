@@ -28,9 +28,9 @@ public class UserProfileController {
             model.addAttribute("contactNo", contactNo);
 
             //In this I am getting the error
-            LinkedHashMap<String, Object> address = (LinkedHashMap<String, Object>) oauth2User.getAttribute("address");
-            String country = (String) address.get("country");
-            model.addAttribute("country", country);
+//            LinkedHashMap<String, Object> address = (LinkedHashMap<String, Object>) oauth2User.getAttribute("address");
+//            String country = (String) address.get("country");
+//            model.addAttribute("country", country);
 
 
         return "profile";
