@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "vehicle_service")
 public class Vehicle {
 
     @Id
