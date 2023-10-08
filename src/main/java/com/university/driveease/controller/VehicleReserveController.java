@@ -3,7 +3,9 @@ package com.university.driveease.controller;
 import com.university.driveease.model.Vehicle;
 import com.university.driveease.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +36,10 @@ public class VehicleReserveController {
 
     }
     @PostMapping("/reservation")
-    public String saveReservation(@ModelAttribute("vehicle") Vehicle form, OAuth2AuthenticationToken token,Model model) {
+    public String saveReservation(@ModelAttribute("vehicle") Vehicle form, @AuthenticationPrincipal OAuth2User oauth2User, Model model) {
 
-            if(vehicleRepository.findByVehicle_no(form.getVehicle_no()).isPresent()){
-                return "error";
-            }
-            else {
                 // Retrieve the authenticated user's username from the token
-                String username = token.getName();
+                String username = oauth2User.getAttribute("username");
                 var vehicle_reservation = Vehicle.builder()
                         .date(form.getDate())
                         .time(form.getTime())
@@ -64,7 +62,6 @@ public class VehicleReserveController {
                 vehicleRepository.save(vehicle_reservation);
 
                 return "success";
-            }
 
     }
 
@@ -79,8 +76,8 @@ public class VehicleReserveController {
     }
 
     @GetMapping("/getreservations")
-    public String viewAllReservations(Model model,OAuth2AuthenticationToken token) {
-        List<Vehicle> reservations = vehicleRepository.findAllByUsername(token.getName());
+    public String viewAllReservations(Model model,@AuthenticationPrincipal OAuth2User oauth2User) {
+        List<Vehicle> reservations = vehicleRepository.findAllByUsername(oauth2User.getAttribute("username"));
         model.addAttribute("reservations", reservations);
         return "reservations";
     }
