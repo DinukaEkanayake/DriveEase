@@ -7,9 +7,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://51.132.137.223:3306/isec_assessment2?createDatabaseIfNotExist=true
-    username: isec
-    password: EUHHaYAmtzbv
+    url: jdbc:mysql://IPAddress/isec_assessment2?createDatabaseIfNotExist=true
+    username: user
+    password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -28,8 +28,8 @@ spring:
         registration:
           asgardeo:
             client-name: asgardeo
-            client-id: VvbMfODSJ7kV3VtOxDNxq03gyDMa
-            client-secret: 6TPN_86It3Kd_YQCG2SYnjEVw7fkdGI5KxTorzYZvToa
+            client-id: 
+            client-secret: 
             redirect-uri: http://localhost:8080/login/oauth2/code/asgardeo
             authorization-grant-type: authorization_code
             scope: openid,address,email,phone,profile
